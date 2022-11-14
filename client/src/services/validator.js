@@ -4,8 +4,35 @@ export const validateLoginForm = ({ email, password }) => {
   return isEmailValid && isPasswordValid;
 };
 
+export const validateRegisterForm = ({
+  email,
+  password,
+  passwordConfirm,
+  name,
+}) => {
+  const isEmailValid = validateEmail(email);
+  const isPasswordValid = validatePassword(password);
+  const isNameValid = validateName(name);
+  const isPasswordConfirmValid = validatePasswordConfirm(
+    password,
+    passwordConfirm
+  );
+
+  return (
+    isEmailValid && isPasswordValid && isNameValid && isPasswordConfirmValid
+  );
+};
+
 const validatePassword = (password) => {
   return password.length > 8;
+};
+
+const validateName = (name) => {
+  return name.length > 2;
+};
+
+const validatePasswordConfirm = (password, passwordConfirm) => {
+  return password === passwordConfirm;
 };
 
 const validateEmail = (email) => {
